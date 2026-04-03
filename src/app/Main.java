@@ -15,8 +15,8 @@ public class Main {
         total = daySale * amountDays;
         currency = "EUR";
         System.out.println("Product No " + productNo +  ":" + " " + productType + ",");
-        System.out.println("total sales for "  + amountDays +  " is " + currency + " " + total + ",");
-        System.out.println("sales by day is " + currency + " " + daySale + ",");
+        System.out.println("total sales for "  + amountDays +  " is " + currency + " " + Math.round(total) + ",");
+        System.out.println("sales by day is " + currency + " " + Math.round(daySale) + ",");
         productNo = 2;
         productType = "laptop";
         currency = "EUR";
@@ -24,7 +24,7 @@ public class Main {
         amountDays = 7;
         total = daySale * amountDays;
         System.out.println("Product No " + productNo +  ":" + " " + productType + ",");
-        System.out.println("total sales for "  + amountDays +  " is " + currency + " " + total + ",");
-        System.out.println("sales by day is " + currency + " " + daySale + ",");
+        System.out.println("total sales for "  + amountDays +  " is " + currency + " " + Math.round(total) + ",");
+        System.out.println("sales by day is " + currency + " " + Math.round(daySale) + ",");
     }
 }
