@@ -16,7 +16,7 @@ public class Main {
         String result = String.format("%.2f", daySale);
         currency = "EUR";
         System.out.println("Product No " + productNo +  ":" + " " + productType + ",");
-        System.out.println("total sales for "  + amountDays +  " days " + " is " + currency + " " + total + ",");
+        System.out.println("total sales for "  + amountDays +  " days " + "is " + currency + " " + total + ",");
         System.out.printf("sales by day is " + currency + " " + result + ",");
         productNo = 2;
         productType = "laptop";
@@ -26,7 +26,7 @@ public class Main {
         amountDays = 7;
         System.out.println(" ");
         System.out.println("Product No " + productNo +  ":" + " " + productType + ",");
-        System.out.println("total sales for "  + amountDays +  " days " + " is " + currency + " " + total + ",");
+        System.out.println("total sales for "  + amountDays +  " days " + "is " + currency + " " + total + ",");
         System.out.printf("sales by day is " + currency + " " + daySale + ",");
     }
 }
