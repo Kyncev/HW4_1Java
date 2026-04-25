@@ -1,96 +1,53 @@
 package app;
-import java.util.Arrays;
 import java.util.Random;
+import java.util.Scanner;
+import java.util.Arrays;
 
 public class Main {
-
-    private static final int SIZE = 20;
-    private static final int MIN = -100;
-    private static final int MAX = 100;
-
-    public static void main(String[] args) {
-
-        int[] array = generateArray();
-
-        System.out.println("Елементи масиву: " + Arrays.toString(array));
-
-        int negativeSum = 0;
-        int evenCount = 0;
-        int oddCount = 0;
-
-        int min = array[0];
-        int max = array[0];
-        int minIndex = 0;
-        int maxIndex = 0;
-
-        int firstNegativeIndex = -1;
-
-        for (int i = 0; i < array.length; i++) {
-            int value = array[i];
-
-
-            if (value < 0) {
-                negativeSum += value;
-
-                if (firstNegativeIndex == -1) {
-                    firstNegativeIndex = i;
-                }
-            }
-
-
-            if (value % 2 == 0) {
-                evenCount++;
-            } else {
-                oddCount++;
-            }
-
-
-            if (value < min) {
-                min = value;
-                minIndex = i;
-            }
-
-            if (value > max) {
-                max = value;
-                maxIndex = i;
-            }
+    public static void main() {
+        int[]arr = new int[15];
+        Random rand = new Random();
+        Scanner scanner = new Scanner(System.in);
+        for (int i = 0; i < arr.length; i++){
+            arr[i]= rand.nextInt(100)+1;
         }
-
-        System.out.println("Сума від'ємних чисел: " + negativeSum);
-        System.out.println("Кількість парних чисел: " + evenCount);
-        System.out.println("Кількість непарних чисел: " + oddCount);
-        System.out.println("Найменший елемент: " + min + " (індекс " + minIndex + ")");
-        System.out.println("Найбільший елемент: " + max + " (індекс " + maxIndex + ")");
-
-
-        if (firstNegativeIndex == -1 || firstNegativeIndex == array.length - 1) {
-            System.out.println("Немає елементів після першого від'ємного числа.");
+        System.out.println("Початковий вигляд масиву: " + Arrays.toString(arr));
+        insertionSort(arr);
+        System.out.println("Відсортований масив: " + Arrays.toString(arr));
+        System.out.print("Введіть число для пошуку: ");
+        int target = scanner.nextInt();
+        int index = binarySearch(arr, target);
+        if (index != -1){
+            System.out.println("Індекс числа " + target + " у відсортованому масиві: " + index);
         } else {
-            double sum = 0;
-            int count = 0;
-
-            for (int i = firstNegativeIndex + 1; i < array.length; i++) {
-                sum += array[i];
-                count++;
+            System.out.println("Число " + target + " не знайдено в масиві.");
+        }
+        scanner.close();
+    }
+    public static void insertionSort(int[] arr){
+        for (int i = 1; i < arr.length; i++){
+            int key = arr[i];
+            int j = i - 1;
+            while (j >= 0 && arr[j]>key){
+                arr[j + 1] = arr[j];
+                j--;
             }
-
-            double average = sum / count;
-            System.out.printf(
-                    "Середнє арифметичне після першого від'ємного: %.2f%n",
-                    average
-            );
+            arr[j + 1] = key;
         }
     }
-
-
-    private static int[] generateArray() {
-        Random random = new Random();
-        int[] array = new int[SIZE];
-
-        for (int i = 0; i < SIZE; i++) {
-            array[i] = random.nextInt(MAX - MIN + 1) + MIN;
+    public static int binarySearch(int[] arr, int target){
+        int left = 0;
+        int right = arr.length - 1;
+        while (left <= right){
+            int mid = (left + right) / 2;
+            if (arr[mid] == target){
+                return mid;
+            } else if (arr[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
         }
-
-        return array;
+        return -1;
     }
 }
