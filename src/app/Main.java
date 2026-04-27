@@ -11,10 +11,10 @@ public class Main {
         for (int i = 0; i < arr.length; i++){
             arr[i]= rand.nextInt(100)+1;
         }
-        System.out.println("Початковий вигляд масиву: " + Arrays.toString(arr));
-        insertionSort(arr);
-        System.out.println("Відсортований масив: " + Arrays.toString(arr));
-        System.out.print("Введіть число для пошуку: ");
+            System.out.println("Початковий вигляд масиву: " + Arrays.toString(arr));
+            insertionSort(arr);
+            System.out.println("Відсортований масив: " + Arrays.toString(arr));
+            System.out.print("Введіть число для пошуку: ");
         int target = scanner.nextInt();
         int index = binarySearch(arr, target);
         if (index != -1){
