@@ -1,53 +1,80 @@
 package app;
 import java.util.Random;
-import java.util.Scanner;
-import java.util.Arrays;
 
 public class Main {
-    public static void main() {
-        int[]arr = new int[15];
+    public static void main(String[] args) {
+        int[][] matrix = new int[4][4];
         Random rand = new Random();
-        Scanner scanner = new Scanner(System.in);
-        for (int i = 0; i < arr.length; i++){
-            arr[i]= rand.nextInt(100)+1;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                matrix[i][j] = rand.nextInt(50) + 1;
+            }
         }
-        System.out.println("Початковий вигляд масиву: " + Arrays.toString(arr));
-        insertionSort(arr);
-        System.out.println("Відсортований масив: " + Arrays.toString(arr));
-        System.out.print("Введіть число для пошуку: ");
-        int target = scanner.nextInt();
-        int index = binarySearch(arr, target);
-        if (index != -1){
-            System.out.println("Індекс числа " + target + " у відсортованому масиві: " + index);
+        System.out.println("Матриця 4x4:");
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                System.out.print(matrix[i][j] + "\t");
+            }
+            System.out.println();
+        }
+        int sumEvenRows = 0;
+        int sumOddRows = 0;
+        long prodEvenCols = 1;
+        long prodOddCols = 1;
+        for (int i = 0; i < 4; i++) {
+            for (int j = 0; j < 4; j++) {
+                if (i % 2 == 0) {
+                    sumEvenRows += matrix[i][j];
+                } else {
+                    sumOddRows += matrix[i][j];
+                }
+                if (j % 2 == 0) {
+                    prodEvenCols *= matrix[i][j];
+                } else {
+                    prodOddCols *= matrix[i][j];
+                }
+            }
+        }
+        System.out.println("\nСума парних рядків: " + sumEvenRows);
+        System.out.println("Сума непарних рядків: " + sumOddRows);
+        System.out.println("Добуток парних стовпців: " + prodEvenCols);
+        System.out.println("Добуток непарних стовпців: " + prodOddCols);
+        boolean isMagic = true;
+        int magicSum = 0;
+        for (int j = 0; j < 4; j++) {
+            magicSum += matrix[0][j];
+        }
+        for (int i = 0; i < 4; i++) {
+            int rowSum = 0;
+            for (int j = 0; j < 4; j++) {
+                rowSum += matrix[i][j];
+            }
+            if (rowSum != magicSum) {
+                isMagic = false;
+            }
+        }
+        for (int j = 0; j < 4; j++) {
+            int colSum = 0;
+            for (int i = 0; i < 4; i++) {
+                colSum += matrix[i][j];
+            }
+            if (colSum != magicSum) {
+                isMagic = false;
+            }
+        }
+        int diag1 = 0;
+        int diag2 = 0;
+        for (int i = 0; i < 4; i++) {
+            diag1 += matrix[i][i];
+            diag2 += matrix[i][3 - i];
+        }
+        if (diag1 != magicSum || diag2 != magicSum) {
+            isMagic = false;
+        }
+        if (isMagic) {
+            System.out.println("\nМатриця є магічним квадратом.");
         } else {
-            System.out.println("Число " + target + " не знайдено в масиві.");
+            System.out.println("\nМатриця не є магічним квадратом.");
         }
-        scanner.close();
-    }
-    public static void insertionSort(int[] arr){
-        for (int i = 1; i < arr.length; i++){
-            int key = arr[i];
-            int j = i - 1;
-            while (j >= 0 && arr[j]>key){
-                arr[j + 1] = arr[j];
-                j--;
-            }
-            arr[j + 1] = key;
-        }
-    }
-    public static int binarySearch(int[] arr, int target){
-        int left = 0;
-        int right = arr.length - 1;
-        while (left <= right){
-            int mid = (left + right) / 2;
-            if (arr[mid] == target){
-                return mid;
-            } else if (arr[mid] < target) {
-                left = mid + 1;
-            } else {
-                right = mid - 1;
-            }
-        }
-        return -1;
     }
 }
