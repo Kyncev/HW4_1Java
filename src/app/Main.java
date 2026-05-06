@@ -1,80 +1,83 @@
 package app;
-import java.util.Random;
+import java.util.Arrays;
 
 public class Main {
+
+    public static void printSqr(int number) {
+        System.out.println("Квадрат числа " + number + " дорівнює " + (number * number));
+    }
+
+    public static double cylinderVolume(double radius, double height) {
+        return Math.PI * radius * radius * height;
+    }
+
+    public static int arraySum(int[] arr) {
+        int sum = 0;
+        for (int num : arr) {
+            sum += num;
+        }
+        return sum;
+    }
+
+    public static String reverseString(String text) {
+        String reversed = "";
+
+        for (int i = text.length() - 1; i >= 0; i--) {
+            reversed += text.charAt(i);
+        }
+
+        return reversed;
+    }
+
+    public static int power(int a, int b) {
+        int result = 1;
+
+        for (int i = 0; i < b; i++) {
+            result *= a;
+        }
+
+        return result;
+    }
+
+    public static void printText(int n, String text) {
+
+        for (int i = 0; i < n; i++) {
+            System.out.println(text);
+        }
+    }
+
     public static void main(String[] args) {
-        int[][] matrix = new int[4][4];
-        Random rand = new Random();
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                matrix[i][j] = rand.nextInt(50) + 1;
-            }
-        }
-        System.out.println("Матриця 4x4:");
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.print(matrix[i][j] + "\t");
-            }
-            System.out.println();
-        }
-        int sumEvenRows = 0;
-        int sumOddRows = 0;
-        long prodEvenCols = 1;
-        long prodOddCols = 1;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                if (i % 2 == 0) {
-                    sumEvenRows += matrix[i][j];
-                } else {
-                    sumOddRows += matrix[i][j];
-                }
-                if (j % 2 == 0) {
-                    prodEvenCols *= matrix[i][j];
-                } else {
-                    prodOddCols *= matrix[i][j];
-                }
-            }
-        }
-        System.out.println("\nСума парних рядків: " + sumEvenRows);
-        System.out.println("Сума непарних рядків: " + sumOddRows);
-        System.out.println("Добуток парних стовпців: " + prodEvenCols);
-        System.out.println("Добуток непарних стовпців: " + prodOddCols);
-        boolean isMagic = true;
-        int magicSum = 0;
-        for (int j = 0; j < 4; j++) {
-            magicSum += matrix[0][j];
-        }
-        for (int i = 0; i < 4; i++) {
-            int rowSum = 0;
-            for (int j = 0; j < 4; j++) {
-                rowSum += matrix[i][j];
-            }
-            if (rowSum != magicSum) {
-                isMagic = false;
-            }
-        }
-        for (int j = 0; j < 4; j++) {
-            int colSum = 0;
-            for (int i = 0; i < 4; i++) {
-                colSum += matrix[i][j];
-            }
-            if (colSum != magicSum) {
-                isMagic = false;
-            }
-        }
-        int diag1 = 0;
-        int diag2 = 0;
-        for (int i = 0; i < 4; i++) {
-            diag1 += matrix[i][i];
-            diag2 += matrix[i][3 - i];
-        }
-        if (diag1 != magicSum || diag2 != magicSum) {
-            isMagic = false;
-        }
-        if (isMagic) {
-            System.out.println("\nМатриця є магічним квадратом.");
-        } else {
-            System.out.println("\nМатриця не є магічним квадратом.");
-        }
+
+        // 1
+        int number = 12;
+        printSqr(number);
+
+        // 2
+        double radius = 4.3;
+        double height = 12.7;
+        double volume = cylinderVolume(radius, height);
+
+        System.out.println("\nОб'єм циліндра з радіусом " + radius + " і висотою " + height + " дорівнює " + volume);
+
+        // 3
+        int[] numbers = {10, 30, 50, 70, 90};
+
+        System.out.println("\nМасив чисел: " + Arrays.toString(numbers));
+        System.out.println("Сума всіх елементів масиву дорівнює " + arraySum(numbers));
+
+        // 4
+        String text = "Privit, Mr. Andrey!";
+        System.out.println("\nРядок в зворотньому порядку: " + reverseString(text));
+
+        // 5
+        int a = 4;
+        int b = 3;
+        System.out.println("\nРезультат " + a + "^" + b + " дорівнює " + power(a, b));
+
+        // 6
+        int n = 4;
+        String message = "Hillel Java Basic";
+        System.out.println();
+        printText(n, message);
     }
 }
