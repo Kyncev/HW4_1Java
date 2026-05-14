@@ -1,34 +1,53 @@
 package app;
-class Person {
-    String name;
-    int age;
-    String work;
-    Person(String name, int age, String work) {
-        this.name = name;
-        this.age = age;
-        this.work = work;
+interface Shape {
+    double getArea();
+}
+class Circle implements Shape {
+    double radius;
+    Circle(double radius) {
+        this.radius = radius;
     }
-    void changeWork(String newWork) {
-        work = newWork;
-    }
-    void showInfo() {
-        System.out.println("Ім'я: " + name + ", Вік: " + age + ", Професія: " + work + "\t");
+    @Override
+    public double getArea() {
+        return Math.PI * radius * radius;
     }
 }
-
+class Square implements Shape {
+    double side;
+    Square(double side) {
+        this.side = side;
+    }
+    @Override
+    public double getArea() {
+        return side * side;
+    }
+}
+class Triangle implements Shape {
+    double base;
+    double height;
+    Triangle(double base, double height) {
+        this.base = base;
+        this.height = height;
+    }
+    @Override
+    public double getArea() {
+        return (base * height) / 2;
+    }
+}
 public class Main {
+    public static double totalArea(Shape[] shapes) {
+        double sum = 0;
+        for (Shape shape : shapes) {
+            sum += shape.getArea();
+        }
+        return sum;
+    }
     public static void main(String[] args) {
-        Person person1 = new Person("Vitalii", 26, "Актор");
-        Person person2 = new Person("Andrey", 30, "Розробник");
-        Person person3 = new Person("Bob", 42, "Лікар");
-        person1.showInfo();
-        person2.showInfo();
-        person3.showInfo();
-        System.out.println();
-        Person person4 = new Person("Alice", 28, "Архітектор");
-        person4.showInfo();
-        person4.changeWork("Дизайнер");
-        System.out.println("(Після оновлення професії)");
-        person4.showInfo();
+        Shape[] shapes = {new Circle(7.62), new Square(4.5), new Triangle(6.3, 3.3)};
+        for (Shape shape : shapes) {
+            System.out.println("Площа фігури: " + shape.getArea());
+        }
+        System.out.println("Сумарна площа: " + totalArea(shapes)
+        );
     }
 }
